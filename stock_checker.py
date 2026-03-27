@@ -11,6 +11,7 @@ import logging
 
 # Setting up logging configuration
 logging.basicConfig(filename='stock_watch.log', filemode='a', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger('urllib3').setLevel(logging.ERROR)
 
 # Only principal matcha products are included
 PRODUCT_LIST = ['Aoarashi', 'Wako', 'Isuzu']
@@ -23,25 +24,18 @@ def marukyu_extraction():
         - html_source (str): The HTML source of the webpage.
     '''
     url = "https://www.marukyu-koyamaen.co.jp/english/shop/products/catalog/matcha?currency=USD"
-    driver = uc.Chrome()
+    
+    driver = uc.Chrome(version_main=146)
+    time.sleep(3)
+    
     driver.get(url)
-
-    # driver.maximize_window()
-    time.sleep(2)
-
-    try:
-        # Wait until the product title is visible
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.TAG_NAME, "body"))
-        )
-    except Exception as e:
-        logging.error(f"Error waiting for product title: {e}")
-        driver.quit()
-        exit(1)
-
+    time.sleep(10)  # Wait for full page load + Cloudflare
+    
     html_source = driver.page_source
+    
+    time.sleep(2)
     driver.quit()
-
+    
     return html_source
 
 def stock_parser(html_source):
@@ -103,7 +97,14 @@ def main():
     '''
     html_source = marukyu_extraction()
 
-    information_list = stock_parser(html_source)
+    if html_source is None:
+        logging.error("Failed to extract HTML source.")
+        exit(1)
+    else:
+        logging.critical("Successfully extracted HTML source.")
+        print(html_source)
+
+    # information_list = stock_parser(html_source)
 
 if __name__ == "__main__":
     main()
