@@ -6,6 +6,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import time
+import json
+import logging
+
+# Setting up logging configuration
+logging.basicConfig(filename='stock_watch.log', filemode='a', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Only principal matcha products are included
 PRODUCT_LIST = ['Aoarashi', 'Wako', 'Isuzu']
@@ -30,9 +35,9 @@ def marukyu_extraction():
             EC.visibility_of_element_located((By.TAG_NAME, "body"))
         )
     except Exception as e:
-        print(f"Error waiting for product title: {e}")
+        logging.error(f"Error waiting for product title: {e}")
         driver.quit()
-        return
+        exit(1)
 
     html_source = driver.page_source
     driver.quit()
@@ -45,11 +50,46 @@ def stock_parser(html_source):
 
     Args:
         - html_source (str): The HTML source of the webpage.
-    '''
-    # Implementing BeautifulSoup to parse the HTML source and check for stock availability
-    matcha_soup = BeautifulSoup(html_source, "html.parser")
 
-    pass
+    Returns:
+        - information_list (list): A list of tuples containing item name, link, and stock status.
+    '''
+    # Check if html_source is None before parsing
+    if html_source is None:
+        logging.error("No HTML source provided for parsing.")
+        exit(1)
+
+    matcha_soup = BeautifulSoup(html_source, "html.parser")
+    information_list = []
+
+    for product in PRODUCT_LIST:
+        matcha = matcha_soup.find("a", title=product)
+
+        if matcha is not None:
+            matcha_product_information = {}
+            matcha_product_information['product_name'] = product
+            
+            # Getting the link for the product
+            if matcha.get('href') is None:
+                logging.warning(f"No link found for {product}.")
+
+            matcha_product_information['link'] = matcha.get('href', 'No Link')
+
+            # Getting stock status for the product
+            matcha_parent = matcha.find_parent("li")
+            if 'outofstock' in matcha_parent['class']:
+                matcha_product_information['stock_status'] = 'Out of Stock'
+            elif 'instock' in matcha_parent['class']:
+                matcha_product_information['stock_status'] = 'In Stock'
+            else:
+                logging.warning(f"Stock status of {product} is unknown.")
+                matcha_product_information['stock_status'] = 'Unknown'
+
+            information_list.append(matcha_product_information)
+        else:
+            logging.warning(f"{product} not found on the page.")
+
+    return information_list
 
 def notify_user():
     '''
@@ -63,7 +103,17 @@ def main():
     '''
     html_source = marukyu_extraction()
 
-    stock_parser(html_source)
+    information_list = stock_parser(html_source)
 
 if __name__ == "__main__":
     main()
+
+# To find in stock = "instock" and out of stock = "outofstock"
+# Located in <li class="product product-type-variable status-publish [STOCKSTATUS] last swiper-slide swiper-slide-visible swiper-slide-active" id="item-2030" style="width: 175.5px;">
+
+# links = soup.find_all('a')
+# for link in links:
+#     if link.get('title') != None:
+#         print(link.get('href') + " " + link.get('title'))
+#     else:
+#         print(link.get('href'))
