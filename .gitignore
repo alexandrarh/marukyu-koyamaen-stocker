@@ -209,3 +209,4 @@ __marimo__/
 # Local files
 .DS_Store
 beautiful_soup_test.py
+output_page.html
