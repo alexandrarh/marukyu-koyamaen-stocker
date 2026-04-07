@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import time
 import json
 import logging
+import pandas as pd
 
 # Setting up logging configuration
 logging.basicConfig(filename='stock_watch.log', filemode='a', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -15,6 +16,9 @@ logging.getLogger('urllib3').setLevel(logging.ERROR)
 
 # Only principal matcha products are included
 PRODUCT_LIST = ['Aoarashi', 'Wako', 'Isuzu']
+
+# File name for history
+HISTORY_FILE = 'matcha_history.csv'
 
 def marukyu_extraction():
     '''
@@ -85,6 +89,24 @@ def stock_parser(html_source):
 
     return information_list
 
+def update_history(information_list):
+    '''
+    Update the history of stock status for each product.
+
+    Args:
+        - information_list (list): A list of tuples containing item name, link, and stock status.
+    '''
+    # Opening the history file or creating a new one if it doesn't exist
+    matcha_history = pd.read_csv(HISTORY_FILE) if pd.io.common.file_exists(HISTORY_FILE) else pd.DataFrame(columns = ['matcha_product', 'link', 'stock_status', 'last_updated'])
+    
+    for info in information_list:
+        # Check if product exists in history
+        if info['product_name'] in matcha_history['matcha_product'].values:
+            # Check if stock status has changed
+            existing_status = matcha_history.loc[matcha_history['matcha_product'] == info['product_name'], 'stock_status'].values[0]
+            if existing_status != info['stock_status']:
+                pass
+
 def notify_user():
     '''
     Notify the user about stock availability.
@@ -96,25 +118,13 @@ def main():
     Main function for checking stock on Marukyu Koyamaen's website.
     '''
     html_source = marukyu_extraction()
-
     if html_source is None:
         logging.error("Failed to extract HTML source.")
         exit(1)
-    else:
-        logging.critical("Successfully extracted HTML source.")
-        print(html_source)
 
-    # information_list = stock_parser(html_source)
+    information_list = stock_parser(html_source)
+    for info in information_list:
+        print(f"Item Name: {info['product_name']}, Link: {info['link']}, Stock Status: {info['stock_status']}")
 
 if __name__ == "__main__":
     main()
-
-# To find in stock = "instock" and out of stock = "outofstock"
-# Located in <li class="product product-type-variable status-publish [STOCKSTATUS] last swiper-slide swiper-slide-visible swiper-slide-active" id="item-2030" style="width: 175.5px;">
-
-# links = soup.find_all('a')
-# for link in links:
-#     if link.get('title') != None:
-#         print(link.get('href') + " " + link.get('title'))
-#     else:
-#         print(link.get('href'))
