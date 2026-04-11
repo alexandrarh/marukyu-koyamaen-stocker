@@ -29,18 +29,29 @@ def marukyu_extraction():
     '''
     url = "https://www.marukyu-koyamaen.co.jp/english/shop/products/catalog/matcha?currency=USD"
     
-    driver = uc.Chrome(version_main=146)
-    time.sleep(3)
-    
-    driver.get(url)
-    time.sleep(10)  # Wait for full page load + Cloudflare
-    
-    html_source = driver.page_source
-    
-    time.sleep(2)
-    driver.quit()
-    
-    return html_source
+    driver = None
+    try:
+        driver = uc.Chrome(version_main=146, use_subprocess=True)
+        time.sleep(3)
+        
+        driver.get(url)
+        time.sleep(10)  # Wait for full page load + Cloudflare
+        
+        html_source = driver.page_source
+        
+        return html_source
+        
+    except Exception as e:
+        logging.error(f"Error during extraction: {e}")
+        return None
+        
+    finally:
+        if driver is not None:
+            try:
+                driver.quit()
+                time.sleep(2)  # Give it time to fully clean up
+            except Exception as e:
+                logging.warning(f"Error closing driver: {e}")
 
 def stock_parser(html_source):
     '''
@@ -132,6 +143,9 @@ def update_history(information_list):
             }
             matcha_history = pd.concat([matcha_history, pd.DataFrame([new_entry])], ignore_index=True)
 
+        # Save the updated history back to the CSV file
+        matcha_history.to_csv(HISTORY_FILE, index=False)
+
     return instock_changed_products
 
 def notify_user(instock_changed_products):
@@ -154,6 +168,7 @@ def main():
         print(f"Item Name: {info['product_name']}, Link: {info['link']}, Stock Status: {info['stock_status']}")
 
     instock_changed_products = update_history(information_list)
+
     if len(instock_changed_products) > 0:
         notify_user(instock_changed_products)
     else:
