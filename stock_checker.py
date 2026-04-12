@@ -9,6 +9,19 @@ import time
 import json
 import logging
 import pandas as pd
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+APP_PASSWORD = os.getenv("APP_PASSWORD")
+USER_EMAIL = os.getenv("USER_EMAIL")
+
+# For notifications (not env)
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
 
 # Setting up logging configuration
 logging.basicConfig(filename='stock_watch.log', filemode='a', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -128,7 +141,7 @@ def update_history(information_list):
                 # Changes if stock status has changed (both OOS to IS and IS to OOS)
                 matcha_history.loc[matcha_history['matcha_product'] == info['product_name'], ['stock_status', 'last_updated']] = [info['stock_status'], pd.Timestamp.now()]
             else:
-                matcha_history.loc[matcha_history['matcha_product'] == info['product_name'], 'last_updated'] = pd.Timestamp.now()
+                matcha_history.loc[matcha_history['matcha_product'] == info['product_name'], 'last_updated'] = str(pd.Timestamp.now())
         else:
             if info['stock_status'] == 'In Stock':
                 product_info = {'matcha_product': info['product_name'], 'link': info['link']}
@@ -152,7 +165,33 @@ def notify_user(instock_changed_products):
     '''
     Notify the user about stock availability.
     '''
-    pass
+    message = MIMEMultipart()
+    message["From"], message["To"] = USER_EMAIL, USER_EMAIL
+    message["Subject"] = f"Matcha Restock Alert: {len(instock_changed_products)} product(s) available!"
+
+    body = "The following matcha products are now in stock:\n\n"
+    
+    for product in instock_changed_products:
+        product_name = product['matcha_product']
+        product_link = product['link']
+        body += f"- {product_name}: {product_link}\n"
+    
+    body += "\nAct fast - these may sell out quickly!\n"
+    body += f"\nChecked at: {pd.Timestamp.now()}"
+
+    message.attach(MIMEText(body, "plain"))
+
+    try:
+        # Connect and Send
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SENDER_EMAIL, APP_PASSWORD)
+        server.send_message(message)
+        logging.info("Email sent successfully!")
+    except Exception as e:
+        logging.error(f"Error: {e}")
+    finally:
+        server.quit()
 
 def main():
     '''
@@ -164,15 +203,13 @@ def main():
         exit(1)
 
     information_list = stock_parser(html_source)
-    for info in information_list:
-        print(f"Item Name: {info['product_name']}, Link: {info['link']}, Stock Status: {info['stock_status']}")
 
     instock_changed_products = update_history(information_list)
 
     if len(instock_changed_products) > 0:
         notify_user(instock_changed_products)
     else:
-        logging.info("No products changed from Out of Stock to In Stock.")
+        logging.info("No products changed their status.")
 
 if __name__ == "__main__":
     main()
