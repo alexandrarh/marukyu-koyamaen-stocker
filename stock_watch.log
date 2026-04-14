@@ -54,3 +54,27 @@ Stacktrace:
 17  libsystem_pthread.dylib             0x00007ff811ad1857 thread_start + 15
 
 2026-04-12 12:14:00,552 - ERROR - Failed to extract HTML source.
+2026-04-14 08:16:03,743 - ERROR - Error during extraction: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=147.0.7727.56)
+Stacktrace:
+0   d73ee0e85bf954ca_chromedriver       0x0000000104f963e8 d73ee0e85bf954ca_chromedriver + 6792168
+1   d73ee0e85bf954ca_chromedriver       0x0000000104f8da7a d73ee0e85bf954ca_chromedriver + 6756986
+2   d73ee0e85bf954ca_chromedriver       0x000000010498a815 d73ee0e85bf954ca_chromedriver + 452629
+3   d73ee0e85bf954ca_chromedriver       0x000000010495dc78 d73ee0e85bf954ca_chromedriver + 269432
+4   d73ee0e85bf954ca_chromedriver       0x0000000104a0c918 d73ee0e85bf954ca_chromedriver + 985368
+5   d73ee0e85bf954ca_chromedriver       0x0000000104a26d28 d73ee0e85bf954ca_chromedriver + 1092904
+6   d73ee0e85bf954ca_chromedriver       0x00000001049d1147 d73ee0e85bf954ca_chromedriver + 741703
+7   d73ee0e85bf954ca_chromedriver       0x00000001049d1f21 d73ee0e85bf954ca_chromedriver + 745249
+8   d73ee0e85bf954ca_chromedriver       0x0000000104f4e1a7 d73ee0e85bf954ca_chromedriver + 6496679
+9   d73ee0e85bf954ca_chromedriver       0x0000000104f525e6 d73ee0e85bf954ca_chromedriver + 6514150
+10  d73ee0e85bf954ca_chromedriver       0x0000000104f2ee6a d73ee0e85bf954ca_chromedriver + 6368874
+11  d73ee0e85bf954ca_chromedriver       0x0000000104f53058 d73ee0e85bf954ca_chromedriver + 6516824
+12  d73ee0e85bf954ca_chromedriver       0x0000000104f1e520 d73ee0e85bf954ca_chromedriver + 6300960
+13  d73ee0e85bf954ca_chromedriver       0x0000000104f7acd8 d73ee0e85bf954ca_chromedriver + 6679768
+14  d73ee0e85bf954ca_chromedriver       0x0000000104f7ae92 d73ee0e85bf954ca_chromedriver + 6680210
+15  d73ee0e85bf954ca_chromedriver       0x0000000104f8d691 d73ee0e85bf954ca_chromedriver + 6755985
+16  libsystem_pthread.dylib             0x00007ff814e45e4d _pthread_start + 115
+17  libsystem_pthread.dylib             0x00007ff814e41857 thread_start + 15
+
+2026-04-14 08:16:05,808 - ERROR - Failed to extract HTML source.
