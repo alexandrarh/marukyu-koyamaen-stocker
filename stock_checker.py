@@ -44,6 +44,15 @@ def marukyu_extraction():
     
     driver = None
     try:
+        options = uc.ChromeOptions()
+        
+        # Check if running in CI environment (GitHub Actions)
+        if os.getenv('CI'):
+            options.add_argument('--headless=new')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            
         driver = uc.Chrome(version_main=146, use_subprocess=True)
         time.sleep(3)
         
