@@ -2,44 +2,57 @@ name: Matcha restock bot
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
+    # Runs every 30 min during Japan business hours (Mon-Fri 9am-5:30pm JST = 0:00-8:30 UTC)
+    - cron: '0,30 0-8 * * 1-5'  # Mon-Fri, every 30 min from 0:00-8:30 UTC
   workflow_dispatch:
 
 jobs:
-  check-timesheets:
+  check-matcha-stock:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v4 # checkout the repository content to github runner
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: setup python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13' # install the python version needed
+          python-version: '3.12' 
           
-      - name: install python packages
+      - name: Install Chrome and ChromeDriver
+        run: |
+          # Install Chrome
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          
+      - name: Install Python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: execute stock checker script # run stock_checker.py
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Run stock checker
         env:
-          # Important variables
           APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
-
         run: python stock_checker.py
           
-      - name: commit files
+      - name: Commit updated files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+          git add matcha_history.csv
+          git diff-index --quiet HEAD stock_watch.log || git add stock_watch.log
+          git diff-index --quiet HEAD || git commit -m "Update stock history and logs"
           
-      - name: push changes
+      - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main 
+          branch: main
