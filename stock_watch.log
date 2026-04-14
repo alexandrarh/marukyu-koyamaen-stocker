@@ -78,3 +78,6 @@ Stacktrace:
 17  libsystem_pthread.dylib             0x00007ff814e41857 thread_start + 15
 
 2026-04-14 08:16:05,808 - ERROR - Failed to extract HTML source.
+2026-04-14 15:09:36,011 - WARNING - Aoarashi not found on the page.
+2026-04-14 15:09:36,011 - WARNING - Wako not found on the page.
+2026-04-14 15:09:36,012 - WARNING - Isuzu not found on the page.
