@@ -48,6 +48,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add matcha_history.csv
+          git diff-index --quiet HEAD debug_page.html || git add debug_page.html
           git diff-index --quiet HEAD stock_watch.log || git add stock_watch.log
           git diff-index --quiet HEAD || git commit -m "Update stock history and logs"
           
