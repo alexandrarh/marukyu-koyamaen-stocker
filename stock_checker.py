@@ -35,7 +35,7 @@ HISTORY_FILE = 'matcha_history.csv'
 
 def marukyu_extraction():
     '''
-    Extracting site information from Marukyu Koyamaen's website.
+    Extracting the HTML source of Marukyu Koyamaen's matcha product page.
 
     Returns:
         - html_source (str): The HTML source of the webpage.
@@ -52,26 +52,26 @@ def marukyu_extraction():
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-            
-        driver = uc.Chrome(version_main=146, use_subprocess=True)
+            driver = uc.Chrome(options=options)  # Let it auto-detect version
+        else:
+            driver = uc.Chrome(options=options, version_main=146, use_subprocess=True)
+        
         time.sleep(3)
         
         driver.get(url)
-        time.sleep(10)  # Wait for full page load + Cloudflare
+        time.sleep(10)
         
         html_source = driver.page_source
         
         return html_source
-        
     except Exception as e:
         logging.error(f"Error during extraction: {e}")
         return None
-        
     finally:
         if driver is not None:
             try:
                 driver.quit()
-                time.sleep(2)  # Give it time to fully clean up
+                time.sleep(2)
             except Exception as e:
                 logging.warning(f"Error closing driver: {e}")
 
@@ -145,7 +145,7 @@ def update_history(information_list):
                 # If product has changed from OOS to IS, add it to the list for notification
                 if (info['stock_status'] == 'In Stock') and (existing_status == 'Out of Stock'):
                     product_info = {'matcha_product': info['product_name'], 'link': info['link']}
-                    instock_changed_products.append(product_info, ignore_index=True)
+                    instock_changed_products.append(product_info)
 
                 # Changes if stock status has changed (both OOS to IS and IS to OOS)
                 matcha_history.loc[matcha_history['matcha_product'] == info['product_name'], ['stock_status', 'last_updated']] = [info['stock_status'], pd.Timestamp.now()]
@@ -154,7 +154,7 @@ def update_history(information_list):
         else:
             if info['stock_status'] == 'In Stock':
                 product_info = {'matcha_product': info['product_name'], 'link': info['link']}
-                instock_changed_products.append(product_info, ignore_index=True)
+                instock_changed_products.append(product_info)
 
             # If product does not exist in history, add it
             new_entry = {
@@ -194,7 +194,7 @@ def notify_user(instock_changed_products):
         # Connect and Send
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
-        server.login(SENDER_EMAIL, APP_PASSWORD)
+        server.login(USER_EMAIL, APP_PASSWORD)
         server.send_message(message)
         logging.info("Email sent successfully!")
     except Exception as e:
