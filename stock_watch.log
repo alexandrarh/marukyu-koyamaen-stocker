@@ -97,3 +97,55 @@ Stacktrace:
 2026-04-14 08:47:59,376 - WARNING - Found potential match: Wako | https://www.marukyu-koyamaen.co.jp/english/shop/products/1161020c1
 2026-04-14 08:47:59,382 - WARNING - Found potential match: Isuzu | https://www.marukyu-koyamaen.co.jp/english/shop/products/1191040c1
 2026-04-14 08:47:59,382 - WARNING - Found potential match: Aoarashi | https://www.marukyu-koyamaen.co.jp/english/shop/products/11a1040c1
+2026-04-15 07:44:24,949 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:24,895 - ERROR - Error during extraction: [Errno 2] No such file or directory: '/Users/alexavndra/Library/Application Support/undetected/d4ade455ed6b8523_chromedriver'
+2026-04-15 07:44:24,960 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,007 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,007 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,006 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,560 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,572 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,655 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,655 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,656 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,656 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,755 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,756 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,759 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,760 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:25,965 - ERROR - Error during extraction: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2026-04-15 07:44:25,966 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:26,197 - ERROR - Error during extraction: [Errno 2] No such file or directory: '/Users/alexavndra/Library/Application Support/undetected/55ae87ca7a8f2a1c_chromedriver'
+2026-04-15 07:44:26,200 - ERROR - Failed to extract HTML source.
+2026-04-15 07:44:30,679 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/52bf8bb46acc972c_chromedriver after 30 attempts
+2026-04-15 07:44:30,758 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/246df548ad85da77_chromedriver after 30 attempts
+2026-04-15 07:44:31,323 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/c03d68eb417b07ea_chromedriver after 30 attempts
+2026-04-15 07:44:31,327 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/ad722cb6c8cf887d_chromedriver after 30 attempts
+2026-04-15 07:44:31,387 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/51aff2ebad2580b7_chromedriver after 30 attempts
+2026-04-15 07:44:31,417 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/d4ade455ed6b8523_chromedriver after 30 attempts
+2026-04-15 07:44:31,498 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/6696d7efa3fe768a_chromedriver after 30 attempts
+2026-04-15 07:44:31,499 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/42baa8cd115ab16e_chromedriver after 30 attempts
+2026-04-15 07:44:31,608 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/e4a0b2b0a44b4aed_chromedriver after 30 attempts
+2026-04-15 07:44:31,744 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/6696d7efa3fe768a_chromedriver after 30 attempts
+2026-04-15 07:44:56,184 - WARNING - Found 148 total links on page
+2026-04-15 07:44:56,197 - WARNING - Found potential match: Wako | https://www.marukyu-koyamaen.co.jp/english/shop/products/1161020c1
+2026-04-15 07:44:56,216 - WARNING - Found potential match: Isuzu | https://www.marukyu-koyamaen.co.jp/english/shop/products/1191040c1
+2026-04-15 07:44:56,217 - WARNING - Found potential match: Aoarashi | https://www.marukyu-koyamaen.co.jp/english/shop/products/11a1040c1
+2026-04-15 07:44:57,718 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/cabea7fec6b22fdb_chromedriver after 30 attempts
+2026-04-15 07:44:59,011 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/606cba8cb31b53e1_chromedriver after 30 attempts
+2026-04-15 07:44:59,938 - WARNING - Found 148 total links on page
+2026-04-15 07:44:59,953 - WARNING - Found potential match: Wako | https://www.marukyu-koyamaen.co.jp/english/shop/products/1161020c1
+2026-04-15 07:44:59,973 - WARNING - Found potential match: Isuzu | https://www.marukyu-koyamaen.co.jp/english/shop/products/1191040c1
+2026-04-15 07:44:59,974 - WARNING - Found potential match: Aoarashi | https://www.marukyu-koyamaen.co.jp/english/shop/products/11a1040c1
+2026-04-15 07:45:01,173 - WARNING - Found 148 total links on page
+2026-04-15 07:45:01,184 - WARNING - Found potential match: Wako | https://www.marukyu-koyamaen.co.jp/english/shop/products/1161020c1
+2026-04-15 07:45:01,200 - WARNING - Found potential match: Isuzu | https://www.marukyu-koyamaen.co.jp/english/shop/products/1191040c1
+2026-04-15 07:45:01,200 - WARNING - Found potential match: Aoarashi | https://www.marukyu-koyamaen.co.jp/english/shop/products/11a1040c1

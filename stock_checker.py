@@ -95,18 +95,18 @@ def stock_parser(html_source):
         f.write(html_source)
 
     all_links = matcha_soup.find_all("a")
-    logging.warning(f"Found {len(all_links)} total links on page")
+    logging.info(f"Found {len(all_links)} total links on page")
 
     for link in all_links:
         if any(product.lower() in str(link).lower() for product in PRODUCT_LIST):
-            logging.warning(f"Found potential match: {link.get('title')} | {link.get('href')}")
+            logging.info(f"Found potential match: {link.get('title')} | {link.get('href')}")
 
     information_list = []
 
     for product in PRODUCT_LIST:
         test = matcha_soup.find("a", string=lambda text: text and product in text)
         if test:
-            logging.warning(f"Found {product} link with title attribute: '{test.get('title')}'")
+            logging.info(f"Found {product} link with title attribute: '{test.get('title')}'")
 
         matcha = matcha_soup.find("a", title=product)
 
