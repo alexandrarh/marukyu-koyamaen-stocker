@@ -149,3 +149,54 @@ Stacktrace:
 2026-04-15 07:45:01,184 - WARNING - Found potential match: Wako | https://www.marukyu-koyamaen.co.jp/english/shop/products/1161020c1
 2026-04-15 07:45:01,200 - WARNING - Found potential match: Isuzu | https://www.marukyu-koyamaen.co.jp/english/shop/products/1191040c1
 2026-04-15 07:45:01,200 - WARNING - Found potential match: Aoarashi | https://www.marukyu-koyamaen.co.jp/english/shop/products/11a1040c1
+2026-04-15 20:01:46,834 - ERROR - Error during extraction: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=147.0.7727.56)
+Stacktrace:
+0   218edbccd31bd7be_chromedriver       0x00000001031213d8 218edbccd31bd7be_chromedriver + 6792152
+1   218edbccd31bd7be_chromedriver       0x0000000103118a6a 218edbccd31bd7be_chromedriver + 6756970
+2   218edbccd31bd7be_chromedriver       0x0000000102b15815 218edbccd31bd7be_chromedriver + 452629
+3   218edbccd31bd7be_chromedriver       0x0000000102ae8c78 218edbccd31bd7be_chromedriver + 269432
+4   218edbccd31bd7be_chromedriver       0x0000000102b97918 218edbccd31bd7be_chromedriver + 985368
+5   218edbccd31bd7be_chromedriver       0x0000000102bb1d28 218edbccd31bd7be_chromedriver + 1092904
+6   218edbccd31bd7be_chromedriver       0x0000000102b5c147 218edbccd31bd7be_chromedriver + 741703
+7   218edbccd31bd7be_chromedriver       0x0000000102b5cf21 218edbccd31bd7be_chromedriver + 745249
+8   218edbccd31bd7be_chromedriver       0x00000001030d9197 218edbccd31bd7be_chromedriver + 6496663
+9   218edbccd31bd7be_chromedriver       0x00000001030dd5d6 218edbccd31bd7be_chromedriver + 6514134
+10  218edbccd31bd7be_chromedriver       0x00000001030b9e5a 218edbccd31bd7be_chromedriver + 6368858
+11  218edbccd31bd7be_chromedriver       0x00000001030de048 218edbccd31bd7be_chromedriver + 6516808
+12  218edbccd31bd7be_chromedriver       0x00000001030a9510 218edbccd31bd7be_chromedriver + 6300944
+13  218edbccd31bd7be_chromedriver       0x0000000103105cc8 218edbccd31bd7be_chromedriver + 6679752
+14  218edbccd31bd7be_chromedriver       0x0000000103105e82 218edbccd31bd7be_chromedriver + 6680194
+15  218edbccd31bd7be_chromedriver       0x0000000103118681 218edbccd31bd7be_chromedriver + 6755969
+16  libsystem_pthread.dylib             0x00007ff80f305e4d _pthread_start + 115
+17  libsystem_pthread.dylib             0x00007ff80f301857 thread_start + 15
+
+2026-04-15 20:01:49,137 - ERROR - Failed to extract HTML source.
+2026-04-20 16:18:53,677 - ERROR - Error during extraction: IncompleteRead(7364192 bytes read, 2112246 more expected)
+2026-04-20 16:18:53,681 - ERROR - Failed to extract HTML source.
+2026-04-20 16:18:59,989 - WARNING - could not unlink /Users/alexavndra/Library/Application Support/undetected/1835f222144bae9c_chromedriver after 30 attempts
+2026-04-20 22:44:50,871 - ERROR - Error during extraction: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=147.0.7727.56)
+Stacktrace:
+0   c574cd216546f07a_chromedriver       0x00000001034de3d8 c574cd216546f07a_chromedriver + 6792152
+1   c574cd216546f07a_chromedriver       0x00000001034d5a6a c574cd216546f07a_chromedriver + 6756970
+2   c574cd216546f07a_chromedriver       0x0000000102ed2815 c574cd216546f07a_chromedriver + 452629
+3   c574cd216546f07a_chromedriver       0x0000000102ea5c78 c574cd216546f07a_chromedriver + 269432
+4   c574cd216546f07a_chromedriver       0x0000000102f54918 c574cd216546f07a_chromedriver + 985368
+5   c574cd216546f07a_chromedriver       0x0000000102f6ed28 c574cd216546f07a_chromedriver + 1092904
+6   c574cd216546f07a_chromedriver       0x0000000102f19147 c574cd216546f07a_chromedriver + 741703
+7   c574cd216546f07a_chromedriver       0x0000000102f19f21 c574cd216546f07a_chromedriver + 745249
+8   c574cd216546f07a_chromedriver       0x0000000103496197 c574cd216546f07a_chromedriver + 6496663
+9   c574cd216546f07a_chromedriver       0x000000010349a5d6 c574cd216546f07a_chromedriver + 6514134
+10  c574cd216546f07a_chromedriver       0x0000000103476e5a c574cd216546f07a_chromedriver + 6368858
+11  c574cd216546f07a_chromedriver       0x000000010349b048 c574cd216546f07a_chromedriver + 6516808
+12  c574cd216546f07a_chromedriver       0x0000000103466510 c574cd216546f07a_chromedriver + 6300944
+13  c574cd216546f07a_chromedriver       0x00000001034c2cc8 c574cd216546f07a_chromedriver + 6679752
+14  c574cd216546f07a_chromedriver       0x00000001034c2e82 c574cd216546f07a_chromedriver + 6680194
+15  c574cd216546f07a_chromedriver       0x00000001034d5681 c574cd216546f07a_chromedriver + 6755969
+16  libsystem_pthread.dylib             0x00007ff804ac5e4d _pthread_start + 115
+17  libsystem_pthread.dylib             0x00007ff804ac1857 thread_start + 15
+
+2026-04-20 22:44:53,234 - ERROR - Failed to extract HTML source.
